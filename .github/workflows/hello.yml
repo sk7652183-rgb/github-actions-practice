@@ -13,3 +13,15 @@ jobs:
 
       - name: Run a simple script
         run: echo "Hello from GitHub Actions!"
+      - name: To current date and time
+        run: echo "The current date and time is $(date +%T)"
+      - name: Print branch name
+        run: echo "The branch is ${{ github.ref_name}}"
+      - name: List the files in the repo
+        run:  git ls-files
+      - name: Print the runner's operating system
+        shell: bash
+        run: |
+         echo  "$RUNNER_OS"
+        
+        
