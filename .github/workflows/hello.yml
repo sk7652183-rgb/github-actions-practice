@@ -23,5 +23,7 @@ jobs:
         shell: bash
         run: |
          echo  "$RUNNER_OS"
+      - name: Run a failing command
+        run: exit 1
         
         
