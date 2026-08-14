@@ -1,0 +1,12 @@
+name: Scheduled Automation
+on:
+  schedule:
+    - cron: '30 5 * * *'  
+
+jobs:
+  run-tasks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute the Script
+        run: echo "Workflow triggered successfully!"
+        
