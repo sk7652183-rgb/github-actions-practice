@@ -14,4 +14,4 @@ jobs:
 
     steps:
       - name: PR Check
-        run: echo "PR check running for branch: ${{ github.head_ref }}"
+        run: 'echo "PR check running for branch: ${{ github.head_ref }}" '
