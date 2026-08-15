@@ -12,6 +12,8 @@ jobs:
         run: echo "This job runs on Ubuntu"
       - name: Print OS Name via Environment Variable
         run: echo "The Operating system is ${{ runner.os }}"
+      - name: Get Linux Hostname
+        run: hostname
   windows-job:
       runs-on: windows-latest
       steps:
@@ -21,7 +23,9 @@ jobs:
           run: Write-Output "This job runs on Windows"
         - name: Print OS Name via Environment Variable
           run: echo "The Operating system is ${{ runner.os }}"
-  macos-jobs:
+        - name: Get windows hostname
+          run: hostname
+  macos-job:
       runs-on: macos-latest
       steps:
         - name: Checkout the code 
@@ -30,3 +34,5 @@ jobs:
           run: echo "This job runs on macOS"
         - name: Print OS Name via Environmet Varibale
           run: echo "The Operating system is ${{ runner.os }}"
+        - name: Get macos hostname
+          run: hostname
