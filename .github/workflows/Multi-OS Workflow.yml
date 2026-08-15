@@ -49,4 +49,4 @@ jobs:
         - name: Get macos current User
           run: |
            whoami
-           echo "Home Directory: $HOME
+           echo "Home Directory: $HOME"
