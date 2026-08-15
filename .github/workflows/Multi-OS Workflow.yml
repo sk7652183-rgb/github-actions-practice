@@ -32,6 +32,8 @@ jobs:
           npm --version
       - name: Print Git Version
         run: git --version
+      - name: List All Installed Apt Packages
+        run: apt list --installed
   windows-job:
       runs-on: windows-latest
       steps:
