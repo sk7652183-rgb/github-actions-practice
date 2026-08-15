@@ -18,6 +18,20 @@ jobs:
         run: |
          whoami
          echo "Home Directory: $HOME"
+      - name: Print Docker Version
+        run: |
+          docker --version
+           docker version
+      - name: Print Python Version
+        run: |
+         python3 --version
+         pip3 --version
+      - name: Print Node and npm Versions
+        run: |
+          node --version
+          npm --version
+      - name: Print Git Version
+        run: git --version
   windows-job:
       runs-on: windows-latest
       steps:
