@@ -4,7 +4,7 @@ on:
 
 jobs:
   own-machine:
-   runs-on: [self-hosted, my-linux-runner] 
+   runs-on: [self-hosted, Test] 
    steps:
      - name: Checkout the code
        uses: actions/checkout@v4
