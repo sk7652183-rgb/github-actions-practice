@@ -14,6 +14,10 @@ jobs:
         run: echo "The Operating system is ${{ runner.os }}"
       - name: Get Linux Hostname
         run: hostname
+      - name: Get Linux Current User
+        run: |
+         whoami
+         echo "Home Directory: $HOME"
   windows-job:
       runs-on: windows-latest
       steps:
@@ -25,6 +29,12 @@ jobs:
           run: echo "The Operating system is ${{ runner.os }}"
         - name: Get windows hostname
           run: hostname
+        - name: Get windows current User
+          run: |
+           whoami
+           Write-Output "Home Directory: $env:USERPROFILE"
+
+          
   macos-job:
       runs-on: macos-latest
       steps:
@@ -36,3 +46,7 @@ jobs:
           run: echo "The Operating system is ${{ runner.os }}"
         - name: Get macos hostname
           run: hostname
+        - name: Get macos current User
+          run: |
+           whoami
+           echo "Home Directory: $HOME
