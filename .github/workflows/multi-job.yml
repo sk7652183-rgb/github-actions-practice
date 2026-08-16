@@ -1,0 +1,34 @@
+name: To run the multi-job
+on:
+  push
+
+jobs:
+  build:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout the code
+       uses: actions/checkout@v7
+     - name: Building the Application
+       run: echo "This is the Building Stage"
+
+  Test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v7
+      - name: Testing the application
+        run: echo "This is the testing stage"
+
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: Test
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v7
+    - name: Deploying the application
+      run: echo "This is the Deploying Stage"
+      
+       
+
+  
