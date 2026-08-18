@@ -1,0 +1,54 @@
+name: To Create a smart-pipeline 
+on:  
+  push:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v4
+      - name: Set up the Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install the dependencies
+        run: npm ci
+
+      - name: Run the linter
+        run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v4
+      - name: Set up the Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install the dependencies
+        run: npm ci
+
+      - name: Run the tests
+        run: npm run test
+
+  summary:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - name: Print Branch and Commit Message
+        run: |
+          if [ "${{  github.ref_name }}" = "main" ]; then
+            echo "This is a main branch push"
+          else
+            echo "This is a feature branch push"
+          fi
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit Message: ${{ github.event.head_commit.message }}"
+    
+    
