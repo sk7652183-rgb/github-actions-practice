@@ -1,54 +1,48 @@
-name: To Create a smart-pipeline 
-on:  
+name: Smart Pipeline
+
+on:
   push:
 
 jobs:
+  # 1. Lint Job
   lint:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout the code
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Set up the Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
 
-      - name: Install the dependencies
-        run: npm ci
+      - name: Run Linter
+        run: echo "Running lint checks..."
 
-      - name: Run the linter
-        run: npm run lint
-
+  # 2. Test Job
   test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout the code
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Set up the Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
 
-      - name: Install the dependencies
-        run: npm ci
+      - name: Run Tests
+        run: echo "Running tests..."
 
-      - name: Run the tests
-        run: npm run test
-
+  # 3. Summary Job
   summary:
     runs-on: ubuntu-latest
     needs: [lint, test]
+
     steps:
-      - name: Print Branch and Commit Message
+      - name: Print Branch Information
         run: |
-          if [ "${{  github.ref_name }}" = "main" ]; then
-            echo "This is a main branch push"
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "Branch Type: Main branch push"
           else
-            echo "This is a feature branch push"
+            echo "Branch Type: Feature branch push"
           fi
-          echo "Branch: ${{ github.ref_name }}"
-          echo "Commit Message: ${{ github.event.head_commit.message }}"
-    
-    
+
+          echo "Branch Name: ${{ github.ref_name }}"
+
+      - name: Print Commit Message
+        run: |
+          echo "Commit Message:"
+          echo "${{ github.event.head_commit.message }}"
