@@ -1,0 +1,26 @@
+name: Pass Date Between Jobs
+on: 
+  push:
+
+jobs:
+  # First job generates the date string
+  generate-date:
+    runs-on: ubuntu-latest
+    outputs:
+      today_date: ${{steps.set-date.outputs.date_string }}
+    steps:
+      - name: Generate date string
+        id: set-date
+        run: echo "date_string=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+    # Second job reads and prints the date string
+  print-date:
+    runs-on: ubuntu-latest
+    needs: generate-date
+    steps:
+      - name: Read and print the output
+        run: echo "The date from from the previous job is  ${{ needs.generate-date.outputs.today_date }}
+        
+        
+
+  
