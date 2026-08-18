@@ -19,7 +19,7 @@ jobs:
     needs: generate-date
     steps:
       - name: Read and print the output
-        run: echo "The date from from the previous job is  ${{ needs.generate-date.outputs.today_date }}
+        run: echo "The date from from the previous job is  ${{ needs.generate-date.outputs.today_date }}"
         
         
 
