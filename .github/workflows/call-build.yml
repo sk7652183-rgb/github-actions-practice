@@ -8,7 +8,7 @@ jobs:
   build:
     uses: ./.github/workflows/reusable-build.yml
     with:
-      app-name: "Web-app"
+      app_name: "Web-app"
       environment: "production"
     secrets: 
       docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
