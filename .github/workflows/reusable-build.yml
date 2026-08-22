@@ -21,6 +21,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      build_version: ${{ steps.version.outputs.build_version }}
 
     steps:
       - name: Checkout the code
@@ -30,6 +32,15 @@ jobs:
         run: |
           echo "Deploying ${{ inputs.app_name }}"
           echo "Target environment is ${{ inputs.environment }}"
+
+      - name: Generate Build Version
+        id: version
+        run: |
+         SHORT_SHA=$(git rev-parse --short Head)
+         BUILD_VERSION="v1.0-${SHORT_SH}"
+         echo "Build version: $BUILD_VERSION"
+         echo "build_version=$BUILD_VERSION" >> "$GITHUB_OUTPUT"
+         
 
       - name: Check Docker Token Status
         run: |
