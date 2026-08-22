@@ -1,4 +1,4 @@
-name: To Set the trigger to workflow_call
+name: Reusable Build
 on:
   workflow_call:
     inputs:
@@ -13,7 +13,7 @@ on:
        type: string
 
 jobs:
-  Reusable-build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
@@ -22,4 +22,11 @@ jobs:
         run: |
           echo "Deploying ${{ github.event.inputs.app_name}}
           echo "Target environment is ${{github.event.inputs.environment}}
+      - name: Check Docker Token Status
+        run: |
+         if [ -n "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
+          echo "Docker token is set to true (configured)."
+         else:
+          echo "Docker token is missing or empty." 
+         fi
     
