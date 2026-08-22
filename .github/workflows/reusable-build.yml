@@ -1,0 +1,25 @@
+name: To Set the trigger to workflow_call
+on:
+  workflow_call:
+    inputs:
+      app_name: 
+        description: 'This is the app for testing purpose'
+        required: true
+        type: string
+      environment:
+       description: 'Target deployment environment'
+       required: true
+       default: 'stagging'
+       type: string
+
+jobs:
+  Reusable-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v7
+      - name: Display Inputs
+        run: |
+          echo "Deploying ${{ github.event.inputs.app_name}}
+          echo "Target environment is ${{github.event.inputs.environment}}
+    
