@@ -11,6 +11,10 @@ on:
        required: true
        default: 'stagging'
        type: string
+    secrets:
+         docker_token::
+          required: true
+      
 
 jobs:
   build:
