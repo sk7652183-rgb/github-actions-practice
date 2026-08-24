@@ -1,0 +1,33 @@
+name: Self-hosted runner practice
+
+on:
+  push:
+
+jobs:
+  own-machine:
+    runs-on: [self-hosted, Linux]
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Print hostname
+        run: hostname
+
+      - name: Print working directory
+        run: pwd
+
+      - name: Create the file
+        run: |
+          echo "Hello from GitHub Actions!" > my-test-file.txt
+          echo "Timestamp: $(date)" >> my-test-file.txt
+
+      - name: Verify file exists
+        run: |
+          if [ -f my-test-file.txt ]; then
+            echo "File successfully found!"
+            cat my-test-file.txt
+          else
+            echo "File not found!"
+            exit 1
+          fi

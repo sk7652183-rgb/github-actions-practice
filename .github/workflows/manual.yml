@@ -1,0 +1,21 @@
+name: Get the details of env
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  show-environment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display selected environment
+        run: echo "Selected environment is ${{ inputs.environment }}"

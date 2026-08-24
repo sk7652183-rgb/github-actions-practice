@@ -1,0 +1,68 @@
+name: Multi-OS Workflow
+on:
+  push
+
+jobs:
+  linux-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v7
+      - name: Run linux command
+        run: echo "This job runs on Ubuntu"
+      - name: Print OS Name via Environment Variable
+        run: echo "The Operating system is ${{ runner.os }}"
+      - name: Get Linux Hostname
+        run: hostname
+      - name: Get Linux Current User
+        run: |
+         whoami
+         echo "Home Directory: $HOME"
+      - name: Print Docker Version
+        run: |
+          docker --version
+           docker version
+      - name: Print Python Version
+        run: |
+         python3 --version
+         pip3 --version
+      - name: Print Node and npm Versions
+        run: |
+          node --version
+          npm --version
+      - name: Print Git Version
+        run: git --version
+      - name: List All Installed Apt Packages
+        run: apt list --installed
+  windows-job:
+      runs-on: windows-latest
+      steps:
+        - name: Checkout the code
+          uses: actions/checkout@v7
+        - name: Run windows command
+          run: Write-Output "This job runs on Windows"
+        - name: Print OS Name via Environment Variable
+          run: echo "The Operating system is ${{ runner.os }}"
+        - name: Get windows hostname
+          run: hostname
+        - name: Get windows current User
+          run: |
+           whoami
+           Write-Output "Home Directory: $env:USERPROFILE"
+
+          
+  macos-job:
+      runs-on: macos-latest
+      steps:
+        - name: Checkout the code 
+          uses: actions/checkout@v7
+        - name: Run macos command
+          run: echo "This job runs on macOS"
+        - name: Print OS Name via Environmet Varibale
+          run: echo "The Operating system is ${{ runner.os }}"
+        - name: Get macos hostname
+          run: hostname
+        - name: Get macos current User
+          run: |
+           whoami
+           echo "Home Directory: $HOME"

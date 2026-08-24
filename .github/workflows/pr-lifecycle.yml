@@ -1,0 +1,27 @@
+name: PR Lifecycle
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  issues:
+    types: [opened, edited, closed]
+env:
+    PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v7
+      - name: Print GitHub event action
+        run: echo "The event action is ${{ github.event.action }}"
+      - name: Print PR author
+        run: echo "The PR author is $PR_AUTHOR"
+      - name: Print Source and Target Branch
+        run: |
+         echo "Source branch: ${{ github.head_ref }}"
+         echo "Target branch: ${{ github.base_ref }}"
+
+      - name: This runs only when PR is merged
+        if: github.event.pull_request.merged == true
+        run: echo "The PR was successfully merged!"

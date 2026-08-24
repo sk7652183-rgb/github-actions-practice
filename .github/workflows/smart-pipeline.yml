@@ -1,0 +1,48 @@
+name: Smart Pipeline
+
+on:
+  push:
+
+jobs:
+  # 1. Lint Job
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Linter
+        run: echo "Running lint checks..."
+
+  # 2. Test Job
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Tests
+        run: echo "Running tests..."
+
+  # 3. Summary Job
+  summary:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+
+    steps:
+      - name: Print Branch Information
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "Branch Type: Main branch push"
+          else
+            echo "Branch Type: Feature branch push"
+          fi
+
+          echo "Branch Name: ${{ github.ref_name }}"
+
+      - name: Print Commit Message
+        run: |
+          echo "Commit Message:"
+          echo "${{ github.event.head_commit.message }}"

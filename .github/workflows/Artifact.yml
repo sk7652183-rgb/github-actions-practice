@@ -1,0 +1,39 @@
+name:  To Generate Artifact Between Jobs
+on:
+  push:
+  workflow_dispatch:
+
+
+jobs:
+  Job_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the Code
+        uses: actions/checkout@v4
+      - name: Generate file
+        run: |
+         echo "Hello from Job 1!" > test-report.txt
+         echo "This file was created by GitHub Actions." >> test-report.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+         name: test-report
+         path: test-report.txt
+
+  jobs_2:
+    name: Download and Use Artifact
+    runs-on: ubuntu-latest
+    needs: Job_1
+    steps:
+      - name: Download the Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: test-report
+
+      - name: To Print file contents
+        run: |
+          echo " The content of test-report.txt : "
+          cat test-report.txt
+          
+        
