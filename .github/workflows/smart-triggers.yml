@@ -1,0 +1,27 @@
+name: smart-triggers
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'app/**'
+
+  pull_request:
+    branches:
+      - release/*
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+
+jobs:
+  smart-triggers:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the Code
+        uses: actions/checkout@v4
+
+      - name: Print message
+        run: echo "Workflow triggered successfully"
