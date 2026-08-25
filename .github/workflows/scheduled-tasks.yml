@@ -1,0 +1,36 @@
+name: Scheduled Tasks
+
+on:
+  schedule:
+    # Every Monday at 2:30 AM UTC
+    - cron: '30 2 * * 1'
+
+    # Every 6 hours
+    - cron: '0 */6 * * *'
+
+  # Allows manual execution from GitHub Actions
+  workflow_dispatch:
+
+jobs:
+  scheduled-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show triggered schedule
+        run: |
+          echo "Triggered by schedule: ${{ github.event.schedule }}"
+
+      - name: AWS Health Check
+        run: |
+          URL="https://s3.amazonaws.com"
+
+          RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+
+          echo "AWS endpoint response code: $RESPONSE_CODE"
+
+          if [ "$RESPONSE_CODE" -ge 200 ] && [ "$RESPONSE_CODE" -lt 400 ]; then
+            echo "✅ AWS endpoint is reachable."
+          else
+            echo "❌ AWS endpoint health check failed."
+            exit 1
+          fi
