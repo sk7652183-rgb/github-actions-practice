@@ -8,6 +8,9 @@ on:
     # Every 6 hours
     - cron: '0 */6 * * *'
 
+  # Allows manual execution from GitHub Actions
+  workflow_dispatch:
+
 jobs:
   scheduled-task:
     runs-on: ubuntu-latest
