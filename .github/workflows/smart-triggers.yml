@@ -1,19 +1,7 @@
 name: smart-triggers
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'src/**'
-      - 'app/**'
-
   pull_request:
-    branches:
-      - release
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
 
 jobs:
   smart-triggers:
