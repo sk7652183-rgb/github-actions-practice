@@ -1,1 +1,1 @@
-Testing smart triggers
+Testing PR trigger
