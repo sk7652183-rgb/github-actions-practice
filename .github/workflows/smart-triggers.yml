@@ -3,7 +3,7 @@ name: smart-triggers
 on:
   pull_request:
     branches:
-      - main
+      - release
 
 jobs:
   smart-triggers:
@@ -11,4 +11,4 @@ jobs:
 
     steps:
       - name: Print message
-        run: echo "Pull request triggered successfully"
+        run: echo "Release PR triggered successfully"
