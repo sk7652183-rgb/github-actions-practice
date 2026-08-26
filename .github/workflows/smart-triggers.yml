@@ -2,14 +2,13 @@ name: smart-triggers
 
 on:
   pull_request:
+    branches:
+      - main
 
 jobs:
   smart-triggers:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the Code
-        uses: actions/checkout@v4
-
       - name: Print message
-        run: echo "Workflow triggered successfully"
+        run: echo "Pull request triggered successfully"
